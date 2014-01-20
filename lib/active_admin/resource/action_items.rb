@@ -60,14 +60,14 @@ module ActiveAdmin
         # Edit link on show
         add_action_item only: :show do
           if controller.action_methods.include?('edit') && authorized?(ActiveAdmin::Auth::UPDATE, resource)
-            link_to I18n.t('active_admin.edit_model', model: active_admin_config.resource_label), edit_resource_path(resource)
+            link_to I18n.t('active_admin.edit_model', model: active_admin_config.resource_label), edit_resource_path(resource.id)
           end
         end
 
         # Destroy link on show
         add_action_item only: :show do
           if controller.action_methods.include?('destroy') && authorized?(ActiveAdmin::Auth::DESTROY, resource)
-            link_to I18n.t('active_admin.delete_model', model: active_admin_config.resource_label), resource_path(resource),
+            link_to I18n.t('active_admin.delete_model', model: active_admin_config.resource_label), resource_path(resource.id),
               method: :delete, data: {confirm: I18n.t('active_admin.delete_confirmation')}
           end
         end
